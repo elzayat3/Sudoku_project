@@ -32,10 +32,25 @@
 void initBoard(void);
 
 
+/**
+ * @brief Displays the current state of the Sudoku board.
+ *
+ * @details
+ * This function prints the 9x9 Sudoku board in a formatted
+ * ASCII grid layout to the console.
+ * 
+ * Empty cells (represented internally as 0) are displayed
+ * as blank spaces or placeholders to improve readability.
+ *
+ * The board is rendered with visible borders to simulate
+ * a simple console-based graphical layout.
+ *
+ * @note
+ * This function does not modify the board state.
+ */
 void printBoard(void);
 int isValid(int row, int col, int num);
 int isFull(void);
-void initBoard(void);
 
 
 #endif // SUDOKU_H
