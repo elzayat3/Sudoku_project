@@ -4,53 +4,64 @@
 #define SIZE 9
 
 /**
- * @brief Initializes the Sudoku game board.
+ * @brief Initializes the Sudoku board based on the selected difficulty level.
  *
  * @details
- * This function loads a predefined 9x9 Sudoku puzzle into the
- * internal static board array used by the game module.
- * Empty cells in the puzzle are represented using the value 0.
+ * This function loads one of the predefined Sudoku puzzles
+ * (Easy, Medium, or Hard) into the internal static game board.
+ * The selected puzzle is copied into both:
+ * - The active board array used during gameplay.
+ * - The original board array used to prevent modification
+ *   of predefined cells.
  *
- * The puzzle is first stored in a temporary local array,
- * then copied into the internal board to prepare the initial
- * game state before starting the main game loop.
+ * The function also resets the mistake counter.
+ *
+ * @param level Difficulty level selector:
+ *        - 1 : Easy
+ *        - 2 : Medium
+ *        - 3 : Hard
  *
  * @note
- * The board array is declared as static inside sudoku.c,
- * ensuring encapsulation and preventing direct external access.
- *
- * @par Design Rationale
- * Using a temporary array improves modularity and allows:
- * - Adding multiple difficulty levels
- * - Loading puzzles from external files
- * - Resetting the game state
- * - Future puzzle generation support
+ * If an invalid level is provided, the Hard level
+ * puzzle is selected by default.
  *
  * @warning
- * This function must be called before starting the game loop.
+ * This function must be called before starting
+ * the main game loop.
  */
-void initBoard(void);
-
-
+void initBoard(int level);
 /**
- * @brief Displays the current state of the Sudoku board.
+ * @brief Renders the Sudoku board to the console.
  *
  * @details
- * This function prints the 9x9 Sudoku board in a formatted
- * ASCII grid layout to the console.
- * 
- * Empty cells (represented internally as 0) are displayed
- * as blank spaces or placeholders to improve readability.
+ * This function clears the console screen and prints the
+ * current state of the Sudoku board using a formatted
+ * grid layout with visual separators between 3x3 subgrids.
  *
- * The board is rendered with visible borders to simulate
- * a simple console-based graphical layout.
+ * The function also:
+ * - Displays the current mistake counter.
+ * - Highlights predefined (original) cells in blue.
+ * - Displays player-entered values in green.
+ * - Highlights the current cursor position using
+ *   a colored background.
+ *
+ * @param cursorRow The current row index of the cursor (0–8).
+ * @param cursorCol The current column index of the cursor (0–8).
  *
  * @note
- * This function does not modify the board state.
+ * This function is responsible only for rendering (UI layer)
+ * and does not modify the board state.
+ *
+ * @warning
+ * The cursor indices must be within valid board bounds
+ * to ensure correct highlighting behavior.
  */
-void printBoard(void);
+void printBoard(int cursorRow, int cursorCol);
+
 int isValid(int row, int col, int num);
+
 int isFull(void);
 
+int makeMove(int row, int col, int num);
 
-#endif // SUDOKU_H
+#endif
