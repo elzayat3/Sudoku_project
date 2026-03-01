@@ -2,6 +2,8 @@
 #include"sudoku.h"
 
 static int board[SIZE][SIZE];
+static int original[SIZE][SIZE];
+static int mistakes = 0;
 
 
 void initBoard(void)
@@ -23,22 +25,29 @@ void initBoard(void)
     {
         for (int j=0; j<SIZE; j++)
         {
-            board[i][j]=temp[i][j];
+            board[i][j] = temp[i][j];
+            original[i][j] = temp[i][j];
         }
     }
 }
 
 void printBoard(void)
 {
-    printf("\n");
-    printf("\t\t\tS U D O K U  G A M E\n\n");
+    printf("\033[2J\033[H");  /*clear the screen */
 
-    for (int i=0; i <SIZE;i++)
+    printf("\n\033[1;36m");
+    printf("\t\t\tS U D O K U  G A M E\n");
+    printf("\033[0m\n");
+
+    printf("   Mistakes: \033[1;31m%d\033[0m\n\n", mistakes);
+
+    for (int i=0; i<SIZE;i++)
     {
         if (i%3==0)
         {
             printf("    ===========================================================\n");
         }
+
         for (int line=0; line<3;line++)
         {
             printf("   ");
@@ -51,9 +60,20 @@ void printBoard(void)
                 if (line==1)
                 {
                     if (board[i][j]==0)
+                    {
                         printf("     ");
+                    }
                     else
-                        printf("  %d  ", board[i][j]);
+                    {
+                        if (original[i][j] != 0)
+                        {
+                            printf("  \033[1;34m%d\033[0m  ", board[i][j]);
+                        }
+                        else
+                        {
+                            printf("  \033[1;32m%d\033[0m  ", board[i][j]);
+                        }
+                    }
                 }
                 else
                 {
@@ -64,5 +84,6 @@ void printBoard(void)
             printf(" ||\n");
         }
     }
+
     printf("    ===========================================================\n");
 }
