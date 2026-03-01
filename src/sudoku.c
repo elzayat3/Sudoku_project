@@ -1,3 +1,4 @@
+#include<stdio.h>
 #include"sudoku.h"
 
 static int board[SIZE][SIZE];
@@ -25,4 +26,43 @@ void initBoard(void)
             board[i][j]=temp[i][j];
         }
     }
+}
+
+void printBoard(void)
+{
+    printf("\n");
+    printf("\t\t\tS U D O K U  G A M E\n\n");
+
+    for (int i=0; i <SIZE;i++)
+    {
+        if (i%3==0)
+        {
+            printf("    ===========================================================\n");
+        }
+        for (int line=0; line<3;line++)
+        {
+            printf("   ");
+
+            for (int j=0; j<SIZE;j++)
+            {
+                if (j%3==0)
+                    printf(" || ");
+
+                if (line==1)
+                {
+                    if (board[i][j]==0)
+                        printf("     ");
+                    else
+                        printf("  %d  ", board[i][j]);
+                }
+                else
+                {
+                    printf("     ");
+                }
+            }
+
+            printf(" ||\n");
+        }
+    }
+    printf("    ===========================================================\n");
 }
