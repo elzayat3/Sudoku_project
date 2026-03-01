@@ -51,7 +51,3 @@ Renders the current state of the Sudoku board to the console.
 - This function handles only rendering (UI layer).
 - It does not modify the board state.
 - Cursor indices must be within valid board bounds.
-
-- This function handles only rendering (UI layer).
-- It does not modify the board state.
-- Cursor indices must be within valid board bounds.
