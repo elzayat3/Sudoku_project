@@ -7,7 +7,8 @@ static int mistakes = 0;
 
 /* ================= LEVELS ================= */
 
-static int easy[SIZE][SIZE] = {
+static int easy[SIZE][SIZE] =
+{
     {5,3,0,0,7,0,0,0,0},
     {6,0,0,1,9,5,0,0,0},
     {0,9,8,0,0,0,0,6,0},
@@ -19,7 +20,8 @@ static int easy[SIZE][SIZE] = {
     {0,0,0,0,8,0,0,7,9}
 };
 
-static int medium[SIZE][SIZE] = {
+static int medium[SIZE][SIZE] =
+{
     {0,0,0,0,7,0,0,0,0},
     {6,0,0,1,0,5,0,0,0},
     {0,9,0,0,0,0,0,6,0},
@@ -31,7 +33,8 @@ static int medium[SIZE][SIZE] = {
     {0,0,0,0,8,0,0,7,0}
 };
 
-static int hard[SIZE][SIZE] = {
+static int hard[SIZE][SIZE] =
+{
     {0,0,0,0,0,0,0,0,0},
     {0,0,0,1,0,5,0,0,0},
     {0,9,0,0,0,0,0,6,0},
@@ -48,13 +51,21 @@ void initBoard(int level)
 {
     int (*selected)[SIZE];
 
-    if (level == 1) selected = easy;
-    else if (level == 2) selected = medium;
-    else selected = hard;
-
-    for (int i = 0; i < SIZE; i++)
+    if (level == 1)
     {
-        for (int j = 0; j < SIZE; j++)
+        selected = easy;
+    }
+    else if (level == 2)
+    {
+        selected = medium;
+    }
+    else
+    {
+        selected = hard;
+    }
+    for (int i=0; i<SIZE; i++)
+    {
+        for (int j=0; j<SIZE; j++)
         {
             board[i][j] = selected[i][j];
             original[i][j] = selected[i][j];
@@ -100,25 +111,67 @@ void printBoard(int cursorRow, int cursorCol)
             char cell[4];
 
             if (board[i][j] == 0)
+            {
                 sprintf(cell, "   ");
+            }
             else
+            {
                 sprintf(cell, " %d ", board[i][j]);
-
+            }
             if (isCursor)
+            {
                 printf("\033[41m%s\033[0m", cell);
+            }
             else if (original[i][j] != 0)
+            {
                 printf("\033[1;34m%s\033[0m", cell);
+            }
             else
+            {
                 printf("\033[1;32m%s\033[0m", cell);
-
+            }
             if ((j + 1) % 3 == 0)
+            {
                 printf("║");
+            }
             else
+            {
                 printf("│");
+            }
         }
 
         printf("\n");
     }
 
     printf("   ╚═══════════╩═══════════╩═══════════╝\n");
+}
+
+/* ================= LOGIC ================= */
+
+int isValid(int row, int col, int num)
+{
+    for (int i=0; i<SIZE; i++)
+    {
+        if (board[row][i]==num || board[i][col]==num)
+        {
+            return 0;
+        }
+        else {;}
+    }
+
+    int startRow=row-row%3;
+    int startCol=col-col%3;
+
+    for (int i=0; i<3; i++)
+    {
+        for (int j=0; j<3; j++)
+        {
+            if (board[startRow+i][startCol+j] == num)
+            {
+                return 0;
+            }
+            else {;}
+        }
+    }
+    return 1;
 }

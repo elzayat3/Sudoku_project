@@ -57,11 +57,32 @@ void initBoard(int level);
  * to ensure correct highlighting behavior.
  */
 void printBoard(int cursorRow, int cursorCol);
-
+/**
+ * @brief Checks whether a number can be placed in a specific cell.
+ *
+ * @details
+ * This function validates if the given number can be inserted at
+ * the specified row and column without violating Sudoku rules.
+ *
+ * The validation ensures that:
+ * - The number does not already exist in the same row.
+ * - The number does not already exist in the same column.
+ * - The number does not already exist in the corresponding 3x3 subgrid.
+ *
+ * @param row The row index of the target cell (0–8).
+ * @param col The column index of the target cell (0–8).
+ * @param num The number to validate (1–9).
+ *
+ * @return int
+ * @retval 1 If the placement is valid.
+ * @retval 0 If the placement violates Sudoku constraints.
+ *
+ * @note
+ * This function assumes that the board has already been initialized.
+ * It does not modify the board state.
+ */
 int isValid(int row, int col, int num);
-
 int isFull(void);
-
 int makeMove(int row, int col, int num);
 
 #endif
