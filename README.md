@@ -51,3 +51,59 @@ Renders the current state of the Sudoku board to the console.
 - This function handles only rendering (UI layer).
 - It does not modify the board state.
 - Cursor indices must be within valid board bounds.
+  
+---
+  
+## 🔹 isValid(int row, int col, int num)
+
+### 📌 Description
+
+Checks whether a number can be placed in a specific cell without violating Sudoku rules.
+
+This function validates the move before allowing it to be applied to the board.
+
+---
+
+### ⚙️ Validation Rules
+
+The function ensures that:
+
+1. The number does **not** already exist in the same row.
+2. The number does **not** already exist in the same column.
+3. The number does **not** already exist in the corresponding 3×3 subgrid.
+
+If any of these conditions fail, the move is considered invalid.
+
+---
+
+### 🎯 Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| row       | int  | Row index of the target cell (0–8) |
+| col       | int  | Column index of the target cell (0–8) |
+| num       | int  | Number to validate (1–9) |
+
+---
+
+### 🔁 Return Value
+
+| Return | Meaning |
+|--------|----------|
+| 1      | The move is valid |
+| 0      | The move violates Sudoku constraints |
+
+---
+
+### 🧠 Design Notes
+
+- This function **does not modify** the board.
+- It only performs rule validation.
+- It is used internally by makeMove() to ensure safe gameplay.
+- Time complexity is constant (O(1)), since it checks fixed-size structures (9 cells per rule).
+
+---
+
+### 💡 Why It Matters
+
+isValid() guarantees that the player cannot break Sudoku rules, ensuring the integrity and correctness of the game.
