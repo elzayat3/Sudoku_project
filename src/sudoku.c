@@ -71,7 +71,6 @@ void initBoard(int level)
             original[i][j] = selected[i][j];
         }
     }
-
     mistakes = 0;
 }
 
@@ -104,7 +103,7 @@ void printBoard(int cursorRow, int cursorCol)
 
         printf("   ║");
 
-        for (int j = 0; j < SIZE; j++)
+        for (int j=0; j<SIZE; j++)
         {
             int isCursor = (i == cursorRow && j == cursorCol);
 
@@ -167,6 +166,21 @@ int isValid(int row, int col, int num)
         for (int j=0; j<3; j++)
         {
             if (board[startRow+i][startCol+j] == num)
+            {
+                return 0;
+            }
+            else {;}
+        }
+    }
+    return 1;
+}
+int isFull(void)
+{
+    for (int i=0; i<SIZE; i++)
+    {
+        for (int j=0; j<SIZE; j++)
+        {
+            if (board[i][j] == 0)
             {
                 return 0;
             }
