@@ -240,3 +240,58 @@ Each function has a clear and isolated responsibility.
 
 
 
+# 🔹 getMistakes(void)
+
+## 📌 Overview
+
+The getMistakes() function returns the current number of mistakes
+made by the player during the game.
+
+This function provides controlled, read-only access to the internal
+mistake counter stored inside the Sudoku module.
+
+---
+
+## 🧠 Purpose
+
+The purpose of getMistakes() is to allow the application layer
+(main.c) to monitor player performance without directly accessing
+or modifying internal module variables.
+
+It supports the implementation of gameplay rules such as:
+
+- Limiting the number of allowed mistakes
+- Triggering a "Game Over" condition
+- Displaying the current mistake count in the UI
+
+---
+
+## ⚙️ How It Works
+
+The mistake counter is defined inside sudoku.c as:
+static int mistakes = 0;
+## 🔁 Return Value
+
+| Return Type | Description |
+|-------------|-------------|
+| int         | The current mistake count |
+
+---
+
+## 🎯 Design Advantages
+
+- Preserves encapsulation of the internal mistakes variable.
+- Prevents direct external modification of game state.
+- Keeps module boundaries clean and well-defined.
+- Supports modular and maintainable architecture.
+- Allows flexible game rules (e.g., limiting mistakes).
+
+---
+
+## 🔐 Important Note
+
+getMistakes() does not modify the game state.  
+It only returns the current value of the mistake counter.
+
+All updates to the mistake count are handled internally
+within the makeMove() function.
