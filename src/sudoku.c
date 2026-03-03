@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "..\inc\sudoku.h"
+#include "sudoku.h"
 
 static int board[SIZE][SIZE];
 static int original[SIZE][SIZE];
@@ -79,7 +79,7 @@ void initBoard(int level)
 void printBoard(int cursorRow, int cursorCol)
 {
     int flag=1;
-    printf("\033[2J\033[H");
+    printf("\033[H");
 
     printf("\n\033[1;36m            S U D O K U  G A M E\033[0m\n\n");
     printf("   Mistakes: \033[1;31m%d\033[0m\n\n", mistakes);
