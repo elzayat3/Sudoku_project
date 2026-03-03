@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "sudoku.h"
+#include "..\inc\sudoku.h"
 
 static int board[SIZE][SIZE];
 static int original[SIZE][SIZE];
@@ -187,5 +187,19 @@ int isFull(void)
             else {;}
         }
     }
+    return 1;
+}
+int makeMove(int row, int col, int num)
+{
+    if (original[row][col] != 0)
+    {
+       return -1;
+    }
+    if (!isValid(row, col, num))
+    {
+        mistakes++;
+        return 0;
+    }
+    board[row][col] = num;
     return 1;
 }
