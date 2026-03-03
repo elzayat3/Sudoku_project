@@ -81,7 +81,19 @@ void printBoard(int cursorRow, int cursorCol)
     printf("\033[H");
 
     printf("\n\033[1;36m            S U D O K U  G A M E\033[0m\n\n");
-    printf("   Mistakes: \033[1;31m%d\033[0m\n\n", mistakes);
+    int remaining = 3 - getMistakes();
+
+    printf("   Mistakes: \033[1;31m%d\033[0m / 3",getMistakes());
+
+    if (remaining == 1)
+    {
+        printf("   \033[1;33m(Last chance!)\033[0m");
+    }
+    else if (remaining == 0)
+    {
+        printf("   \033[1;31m(No chances left!)\033[0m");
+    }
+    printf("\n\n");
 
     printf("   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓\n");
 
@@ -102,7 +114,7 @@ void printBoard(int cursorRow, int cursorCol)
             }
             else
             {
-               sprintf(cell, " %d ", board[i][j]);
+                sprintf(cell, " %d ", board[i][j]);
             }
 
             /* Apply block background */
@@ -117,27 +129,27 @@ void printBoard(int cursorRow, int cursorCol)
             /* Cursor */
             if (isCursor)
             {
-              printf("\033[41m");
+                printf("\033[41m");
             }
             /* Original numbers */
             if (!isCursor && original[i][j] != 0)
             {
-              printf("\033[1;34m");
+                printf("\033[1;34m");
             }
             /* Player numbers */
             else if (!isCursor)
             {
-                 printf("\033[1;32m");
+                printf("\033[1;32m");
             }
             printf("%s\033[0m", cell);
 
             if ((j + 1) % 3 == 0)
             {
-               printf("┃");
+                printf("┃");
             }
             else
             {
-               printf("│");
+                printf("│");
             }
         }
 
@@ -145,17 +157,18 @@ void printBoard(int cursorRow, int cursorCol)
 
         if (i == 8)
         {
-           printf("   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛\n");
+            printf("   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛\n");
         }
         else if ((i + 1) % 3 == 0)
         {
-           printf("   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫\n");
+            printf("   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫\n");
         }
         else
         {
-           printf("   ┃───────────┼───────────┼───────────┃\n");
+            printf("   ┃───────────┼───────────┼───────────┃\n");
         }
     }
+}
 }
 
 /* ================= LOGIC ================= */
@@ -215,10 +228,4 @@ int makeMove(int row, int col, int num)
     }
     board[row][col] = num;
     return 1;
-}
-
-
-int getMistakes(void)
-{
-    return mistakes;
 }
