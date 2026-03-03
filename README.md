@@ -171,3 +171,72 @@ It only checks whether the board contains empty cells.
 
 However, since every move is validated using isValid(),  
 a full board in this project guarantees a valid solution.
+
+---
+# 🔹 makeMove(int row, int col, int num)
+
+## 📌 Overview
+
+The makeMove() function handles the logic of applying a player's move to the Sudoku board.
+
+It ensures that the move follows the game rules and prevents modification of predefined puzzle cells.
+
+This function acts as the core gameplay controller for player interactions.
+
+---
+
+## 🧠 Purpose
+
+The purpose of makeMove() is to:
+
+- Prevent modification of original puzzle cells.
+- Validate the move using isValid().
+- Update the board if the move is correct.
+- Increment the mistake counter if the move is invalid.
+
+It separates **game rule enforcement** from user input handling.
+
+---
+
+## ⚙️ How It Works
+
+1. Checks whether the selected cell belongs to the original puzzle.
+   - If yes → returns -1 (move rejected).
+2. Calls isValid() to verify Sudoku constraints.
+   - If invalid → increments mistake counter and returns 0.
+3. If valid → updates the board with the new number and returns 1.
+
+---
+
+## 🔁 Return Value
+
+| Return | Meaning |
+|--------|----------|
+| 1  | Move successful and board updated |
+| 0  | Invalid move (rule violation) |
+| -1 | Attempted to modify original puzzle cell |
+
+---
+
+## 🎯 Importance in Game Design
+
+- Enforces Sudoku rules.
+- Protects predefined puzzle data.
+- Tracks player mistakes.
+- Centralizes move validation logic.
+- Keeps main() clean and simple.
+
+---
+
+## 🔐 Design Concept
+
+makeMove() follows the principle of **Separation of Concerns**:
+
+- isValid() → Handles rule validation.
+- makeMove() → Handles gameplay logic.
+- printBoard() → Handles rendering.
+
+Each function has a clear and isolated responsibility.
+
+
+
