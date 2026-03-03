@@ -82,7 +82,29 @@ void printBoard(int cursorRow, int cursorCol);
  * It does not modify the board state.
  */
 int isValid(int row, int col, int num);
-int isFull(void);
+/**
+ * @brief Checks whether the Sudoku board is completely filled.
+ *
+ * @details
+ * This function scans the entire 9x9 board to determine
+ * whether any empty cells (represented by value 0) still exist.
+ *
+ * It is typically used in the main game loop to detect
+ * when the player has filled all cells.
+ *
+ * @return int
+ * @retval 1 If the board contains no empty cells.
+ * @retval 0 If at least one empty cell still exists.
+ *
+ * @note
+ * This function does not verify whether the solution is correct.
+ * It only checks whether the board is fully filled.
+ *
+ * @warning
+ * A full board does not necessarily mean a valid solution
+ * unless all moves were previously validated using isValid().
+ */
+int isFull(void);;
 int makeMove(int row, int col, int num);
 
 #endif
