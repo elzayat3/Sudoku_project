@@ -83,7 +83,6 @@ void printBoard(int cursorRow, int cursorCol)
     printf("\n\033[1;36m            S U D O K U  G A M E\033[0m\n\n");
     printf("   Mistakes: \033[1;31m%d\033[0m\n\n", mistakes);
 
-    /* Top Border */
     printf("   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓\n");
 
     for (int i = 0; i < SIZE; i++)
@@ -93,6 +92,8 @@ void printBoard(int cursorRow, int cursorCol)
         for (int j = 0; j < SIZE; j++)
         {
             int isCursor = (i == cursorRow && j == cursorCol);
+            int block = (i / 3 + j / 3) % 2;
+
             char cell[4];
 
             if (board[i][j] == 0)
@@ -101,47 +102,58 @@ void printBoard(int cursorRow, int cursorCol)
             }
             else
             {
-              sprintf(cell, " %d ", board[i][j]);
+               sprintf(cell, " %d ", board[i][j]);
+            }
+
+            /* Apply block background */
+            if (block == 0)
+            {
+                printf("\033[48;5;230m");
+            }
+            else
+            {
+                printf("\033[48;5;234m");
             }
             /* Cursor */
             if (isCursor)
             {
-               printf("\033[41m%s\033[0m", cell);
+              printf("\033[41m");
             }
-            /* Original numbers (Blue) */
-            else if (original[i][j] != 0)
+            /* Original numbers */
+            if (!isCursor && original[i][j] != 0)
             {
-              printf("\033[1;34m%s\033[0m", cell);
+              printf("\033[1;34m");
             }
-            /* Player numbers (Green) */
-            else
+            /* Player numbers */
+            else if (!isCursor)
             {
-               printf("\033[1;32m%s\033[0m", cell);
+                 printf("\033[1;32m");
             }
-            /* Vertical separators */
+            printf("%s\033[0m", cell);
+
             if ((j + 1) % 3 == 0)
             {
-              printf("┃");
+               printf("┃");
             }
             else
             {
-                printf("│");
+               printf("│");
             }
         }
+
         printf("\n");
 
-        /* Bottom Border Logic */
         if (i == 8)
         {
-            printf("   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛\n");
+           printf("   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛\n");
         }
         else if ((i + 1) % 3 == 0)
         {
-            printf("   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫\n");
+           printf("   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫\n");
         }
         else
         {
-            printf("   ┃───────────┼───────────┼───────────┃\n");
+           printf("   ┃───────────┼───────────┼───────────┃\n");
         }
     }
 }
