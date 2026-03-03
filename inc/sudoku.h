@@ -30,11 +30,6 @@
  * the main game loop.
  */
 void initBoard(int level);
-
-
-
-
-
 /**
  * @brief Renders the Sudoku board to the console.
  *
@@ -62,10 +57,6 @@ void initBoard(int level);
  * to ensure correct highlighting behavior.
  */
 void printBoard(int cursorRow, int cursorCol);
-
-
-
-
 /**
  * @brief Checks whether a number can be placed in a specific cell.
  *
@@ -91,10 +82,6 @@ void printBoard(int cursorRow, int cursorCol);
  * It does not modify the board state.
  */
 int isValid(int row, int col, int num);
-
-
-
-
 /**
  * @brief Checks whether the Sudoku board is completely filled.
  *
@@ -117,11 +104,7 @@ int isValid(int row, int col, int num);
  * A full board does not necessarily mean a valid solution
  * unless all moves were previously validated using isValid().
  */
-int isFull(void);
-
-
-
-
+int isFull(void);;
 /**
  * @brief Attempts to place a number in a specific Sudoku cell.
  *
@@ -157,6 +140,26 @@ int isFull(void);
  */
 int makeMove(int row, int col, int num);
 
-
+/**
+ * @brief Returns the current number of player mistakes.
+ *
+ * @details
+ * This function provides read-only access to the internal
+ * mistake counter maintained by the Sudoku game module.
+ *
+ * It is primarily used by the main application layer
+ * to determine whether the player has reached the
+ * maximum allowed number of mistakes (e.g., 3 mistakes
+ * triggers a game over condition).
+ *
+ * @return int
+ * The current mistake count.
+ *
+ * @note
+ * This function does not modify the game state.
+ * It preserves encapsulation by preventing direct
+ * external access to the internal static variable.
+ */
+int getMistakes(void);
 
 #endif
