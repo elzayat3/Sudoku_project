@@ -107,3 +107,67 @@ If any of these conditions fail, the move is considered invalid.
 ### 💡 Why It Matters
 
 isValid() guarantees that the player cannot break Sudoku rules, ensuring the integrity and correctness of the game.
+
+---
+
+# 🔹 isFull(void)
+
+## 📌 Overview
+
+The isFull() function determines whether the Sudoku board is completely filled.
+
+In this project, empty cells are represented by the value 0.  
+If no cell contains 0, the board is considered full.
+
+This function is used to detect when the game should end.
+
+---
+
+## 🧠 Purpose
+
+The primary purpose of isFull() is to control the game flow.
+
+It allows the game loop to continue running until all cells are filled.
+
+Example usage:
+
+`c
+while (!isFull())
+{
+    // Game continues
+}
+
+## ⚙️ How It Works
+
+1. The function iterates through all rows (0–8).
+2. For each row, it iterates through all columns (0–8).
+3. If any cell contains 0, it immediately returns 0.
+4. If no empty cells are found after scanning the entire board, it returns 1.
+
+---
+
+## 🔁 Return Value
+
+| Return | Meaning |
+|--------|----------|
+| 1 | The board is completely filled |
+| 0 | At least one empty cell still exists |
+
+---
+
+## 🎯 Importance in Game Design
+
+- Acts as the game completion detector.
+- Prevents infinite loops in the main game loop.
+- Keeps the main function clean and readable.
+- Separates board state validation from gameplay logic.
+
+---
+
+## ⚠ Important Note
+
+isFull() does NOT verify whether the solution is mathematically correct.  
+It only checks whether the board contains empty cells.
+
+However, since every move is validated using isValid(),  
+a full board in this project guarantees a valid solution.
