@@ -169,7 +169,7 @@ void printBoard(int cursorRow, int cursorCol)
         }
     }
 }
-}
+
 
 /* ================= LOGIC ================= */
 
@@ -228,4 +228,8 @@ int makeMove(int row, int col, int num)
     }
     board[row][col] = num;
     return 1;
+}
+int getMistakes(void)
+{
+    return mistakes;
 }
