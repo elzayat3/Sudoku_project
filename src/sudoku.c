@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "sudoku.h"
+#include "..\inc\sudoku.h"
 
 static int board[SIZE][SIZE];
 static int original[SIZE][SIZE];
