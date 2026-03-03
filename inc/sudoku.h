@@ -30,6 +30,11 @@
  * the main game loop.
  */
 void initBoard(int level);
+
+
+
+
+
 /**
  * @brief Renders the Sudoku board to the console.
  *
@@ -57,6 +62,10 @@ void initBoard(int level);
  * to ensure correct highlighting behavior.
  */
 void printBoard(int cursorRow, int cursorCol);
+
+
+
+
 /**
  * @brief Checks whether a number can be placed in a specific cell.
  *
@@ -82,6 +91,10 @@ void printBoard(int cursorRow, int cursorCol);
  * It does not modify the board state.
  */
 int isValid(int row, int col, int num);
+
+
+
+
 /**
  * @brief Checks whether the Sudoku board is completely filled.
  *
@@ -104,7 +117,46 @@ int isValid(int row, int col, int num);
  * A full board does not necessarily mean a valid solution
  * unless all moves were previously validated using isValid().
  */
-int isFull(void);;
+int isFull(void);
+
+
+
+
+/**
+ * @brief Attempts to place a number in a specific Sudoku cell.
+ *
+ * @details
+ * This function handles the logic of performing a player move.
+ * It first checks whether the selected cell is editable
+ * (i.e., not part of the original predefined puzzle).
+ *
+ * If the cell is editable, the function validates the move
+ * using the isValid() function to ensure Sudoku rules are not violated.
+ *
+ * If the move is valid:
+ * - The board is updated with the new number.
+ *
+ * If the move is invalid:
+ * - The mistake counter is incremented.
+ *
+ * @param row The row index of the target cell (0–8).
+ * @param col The column index of the target cell (0–8).
+ * @param num The number to insert (1–9).
+ *
+ * @return int
+ * @retval 1  Move was successful and the board was updated.
+ * @retval 0  Move was invalid (rule violation).
+ * @retval -1 Attempted to modify an original puzzle cell.
+ *
+ * @note
+ * This function modifies the board state only if the move is valid.
+ *
+ * @warning
+ * The function assumes that the board has been initialized
+ * before being called.
+ */
 int makeMove(int row, int col, int num);
+
+
 
 #endif
